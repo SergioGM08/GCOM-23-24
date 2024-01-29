@@ -48,8 +48,8 @@ def reordena():
     for l in frec_en.keys():
         letters.append(l)
         
-    for k in range (len(letters)):
-        print("new_key =", letters[k]+letters[k+1], "new_value =", frec_en[letters[k]] + frec_en[letters[k+1]] )
+    for k in range (0,len(letters), 2):
+        print("new_key =", letters[k]+letters[k+1], "; new_value =", frec_en[letters[k]] + frec_en[letters[k+1]] )
         new_l = {letters[k]+letters[k+1] : frec_en[letters[k]] + frec_en[letters[k+1]]}
         
         new1_l =  {letters[k]:frec_en[letters[k]]}
@@ -59,11 +59,16 @@ def reordena():
         print("new1_l =", new1_l)
         print("new2_l =", new2_l)
 
-        frec_en.pop(letters[k])
-        frec_en.pop(letters[k])
-        frec_en.update(new_l)
+        print("frecn_en.pop =", frec_en.pop(letters[k]))
+        print("frecn_en.pop =", frec_en.pop(letters[k+1]))
+        print("frec_en.update(new_l) = ", frec_en.update(new_l))
+        frec_en1 = dict(sorted(Counter(frec_en).items(), key=lambda item:item[1]))
         
-        print("frec_en = ", frec_en)
+        print("frec_en = ", frec_en1)
+        print("\n")
+        for l in frec_en.keys():
+            letters.append(l)
+            
         
 
     
