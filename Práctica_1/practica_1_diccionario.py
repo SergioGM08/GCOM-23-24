@@ -30,44 +30,49 @@ def frec():
 
 
 frec_en, frec_esp = frec()[0], frec()[1]
-
+frec_en_char, frec_esp_char = frec()[0], frec()[1]
 """
 i) A partir de las muestras dadas, hallar el código Huffman binario de SEng y SEsp, y sus longitudes
 medias L(SEng) y L(SEsp). Comprobar que se satisface el Primer Teorema de Shannon.
 (1.50 puntos)
 """
 
-letters, letras, raiz = [], [], []
-#raiz = {}
 
-def reordena():
+def reordena_en():
     
     while len(frec_en) > 1:
-        """
-        print("frecn_en.pop =", frec_en.pop(letters[k]))
-        print("frecn_en.pop =", frec_en.pop(letters[k+1]))
-        print("frec_en.update(new_l) = ", frec_en.update(new_l))
-        frec_en1 = dict(sorted(Counter(frec_en).items(), key=lambda item:item[1]))
+       
+        svalue_en = heapq.nsmallest(2, frec_en.values())
+        skey_en = [clave for clave, valor in frec_en.items() if valor in svalue_en]
+        k1_en, k2_en = skey_en[0], skey_en[1]
         
-        print("frec_en = ", frec_en1)
-        print("\n")
-        """
-        svalue = heapq.nsmallest(2, frec_en.values())
-        skey = [clave for clave, valor in frec_en.items() if valor in svalue]
-        k1, k2 = skey[0], skey[1]
-        
-        frec_en.update({k1 + k2: sum(svalue)})
-        frec_en.pop(k1)
-        frec_en.pop(k2)
+        print(f"k1_en = {k1_en}, k2_en = {k2_en}")
+        print(f"Lo nuevo es {k1_en + k2_en}: {sum(svalue_en)}")
+        frec_en.update({k1_en + k2_en: sum(svalue_en)})
+        frec_en.pop(k1_en)
+        frec_en.pop(k2_en)
         
         frec_en1 = dict(sorted(Counter(frec_en).items(), key=lambda item: item[1]))
-        
-        """
-        min(frec_en, key=frec_en.get)
-        list(frec_en.keys())[2"]
-        """
+
     return frec_en1
         
+
+
+def reordena_esp():
+    
+    while len(frec_esp) > 1:
+    
+        svalue_esp = heapq.nsmallest(2, frec_esp.values())
+        skey_esp = [clave for clave, valor in frec_esp.items() if valor in svalue_esp]
+        k1_esp, k2_esp = skey_esp[0], skey_esp[1]
+
+        frec_esp.update({k1_esp + k2_esp: sum(svalue_esp)})
+        frec_esp.pop(k1_esp)
+        frec_esp.pop(k2_esp)
+
+        frec_esp1 = dict(sorted(Counter(frec_esp).items(), key=lambda item: item[1]))
+        
+    return frec_esp1
 
 
 
